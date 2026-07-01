@@ -1,0 +1,138 @@
+
+/*
+ * Material 3 baseline color schemes.
+ * Token values are the M3 baseline scheme (source color #6750A4) from
+ * Material Theme Builder / m3.material.io. Light scheme on :root,
+ * dark scheme on .dark.
+ */
+/*
+ * V-Zero Protocol — neutral, enterprise slate/zinc theme.
+ * Near-monochrome M3 scheme: deep slate primary, clean borders, bright
+ * white surfaces in light mode and deep slate surfaces in dark mode.
+ * Custom semantic tokens (--vz-*) cover positive/warning states that the
+ * baseline M3 roles don't express. Every fill is paired with its on-color.
+ */
+:root {
+  color-scheme: light;
+
+  --md-sys-color-primary: #334155;
+  --md-sys-color-on-primary: #ffffff;
+  --md-sys-color-primary-container: #dde4ec;
+  --md-sys-color-on-primary-container: #1a2536;
+  --md-sys-color-secondary: #475569;
+  --md-sys-color-on-secondary: #ffffff;
+  --md-sys-color-secondary-container: #e2e8f0;
+  --md-sys-color-on-secondary-container: #1e293b;
+  --md-sys-color-tertiary: #3f3f46;
+  --md-sys-color-on-tertiary: #ffffff;
+  --md-sys-color-tertiary-container: #e4e4e7;
+  --md-sys-color-on-tertiary-container: #18181b;
+  --md-sys-color-error: #b3261e;
+  --md-sys-color-on-error: #ffffff;
+  --md-sys-color-error-container: #f9dedc;
+  --md-sys-color-on-error-container: #410e0b;
+  --md-sys-color-background: #f7f9fb;
+  --md-sys-color-on-background: #0f172a;
+  --md-sys-color-surface: #ffffff;
+  --md-sys-color-on-surface: #0f172a;
+  --md-sys-color-surface-variant: #e8edf3;
+  --md-sys-color-on-surface-variant: #51607a;
+  --md-sys-color-outline: #94a3b8;
+  --md-sys-color-outline-variant: #dfe5ee;
+  --md-sys-color-shadow: #000000;
+  --md-sys-color-scrim: #000000;
+  --md-sys-color-inverse-surface: #1e293b;
+  --md-sys-color-inverse-on-surface: #f1f5f9;
+  --md-sys-color-inverse-primary: #cbd5e1;
+  --md-sys-color-surface-dim: #dbe2ec;
+  --md-sys-color-surface-bright: #ffffff;
+  --md-sys-color-surface-container-lowest: #ffffff;
+  --md-sys-color-surface-container-low: #f8fafc;
+  --md-sys-color-surface-container: #f1f5f9;
+  --md-sys-color-surface-container-high: #e9eef4;
+  --md-sys-color-surface-container-highest: #e2e8f0;
+
+  /* Custom semantic tokens */
+  --vz-positive: #15803d;
+  --vz-on-positive: #ffffff;
+  --vz-positive-container: #dcfce7;
+  --vz-on-positive-container: #14532d;
+  --vz-warning: #b45309;
+  --vz-warning-container: #fef0d8;
+  --vz-on-warning-container: #7c2d12;
+
+  /* Typefaces */
+  --md-ref-typeface-brand: Inter, system-ui, -apple-system, sans-serif;
+  --md-ref-typeface-plain: Inter, system-ui, -apple-system, sans-serif;
+}
+
+.dark {
+  color-scheme: dark;
+
+  --md-sys-color-primary: #cbd5e1;
+  --md-sys-color-on-primary: #1e293b;
+  --md-sys-color-primary-container: #334155;
+  --md-sys-color-on-primary-container: #e2e8f0;
+  --md-sys-color-secondary: #9aa8bd;
+  --md-sys-color-on-secondary: #1e293b;
+  --md-sys-color-secondary-container: #334155;
+  --md-sys-color-on-secondary-container: #e2e8f0;
+  --md-sys-color-tertiary: #d4d4d8;
+  --md-sys-color-on-tertiary: #27272a;
+  --md-sys-color-tertiary-container: #3f3f46;
+  --md-sys-color-on-tertiary-container: #e4e4e7;
+  --md-sys-color-error: #f2b8b5;
+  --md-sys-color-on-error: #601410;
+  --md-sys-color-error-container: #8c1d18;
+  --md-sys-color-on-error-container: #f9dedc;
+  --md-sys-color-background: #0a0e16;
+  --md-sys-color-on-background: #e2e8f0;
+  --md-sys-color-surface: #0f1623;
+  --md-sys-color-on-surface: #e2e8f0;
+  --md-sys-color-surface-variant: #2b3850;
+  --md-sys-color-on-surface-variant: #b0bccf;
+  --md-sys-color-outline: #64748b;
+  --md-sys-color-outline-variant: #2b3850;
+  --md-sys-color-shadow: #000000;
+  --md-sys-color-scrim: #000000;
+  --md-sys-color-inverse-surface: #e2e8f0;
+  --md-sys-color-inverse-on-surface: #1e293b;
+  --md-sys-color-inverse-primary: #334155;
+  --md-sys-color-surface-dim: #0a0e16;
+  --md-sys-color-surface-bright: #2b3850;
+  --md-sys-color-surface-container-lowest: #070a11;
+  --md-sys-color-surface-container-low: #0f1623;
+  --md-sys-color-surface-container: #141d2d;
+  --md-sys-color-surface-container-high: #1d2738;
+  --md-sys-color-surface-container-highest: #28344a;
+
+  /* Custom semantic tokens */
+  --vz-positive: #4ade80;
+  --vz-on-positive: #052e16;
+  --vz-positive-container: #14532d;
+  --vz-on-positive-container: #bbf7d0;
+  --vz-warning: #fbbf24;
+  --vz-warning-container: #422006;
+  --vz-on-warning-container: #fde68a;
+}
+
+
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--md-sys-color-background);
+  color: var(--md-sys-color-on-background);
+  font-family: var(--md-ref-typeface-plain);
+  -webkit-font-smoothing: antialiased;
+}
+
+

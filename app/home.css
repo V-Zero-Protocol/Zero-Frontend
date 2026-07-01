@@ -1,0 +1,294 @@
+/*
+ * Page layout styles. All colors, shape, and type come from Material 3
+ * design tokens (--md-sys-*). Breakpoints follow the M3 window size
+ * classes: compact < 600px, medium 600-839px, expanded >= 840px.
+ */
+
+.page {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 16px 96px;
+}
+
+/* Header */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--md-sys-color-surface-container);
+  border-bottom: 1px solid var(--md-sys-color-outline-variant);
+}
+
+.site-header-inner {
+  max-width: 1080px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 8px 16px;
+}
+
+.wordmark {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  text-decoration: none;
+  color: var(--md-sys-color-on-surface);
+  font-weight: 500;
+}
+
+.wordmark-accent {
+  color: var(--md-sys-color-primary);
+  font-weight: 700;
+}
+
+.wordmark-text {
+  display: none;
+}
+
+.site-nav {
+  display: flex;
+  gap: 24px;
+  margin-left: auto;
+}
+
+.site-nav a {
+  color: var(--md-sys-color-on-surface-variant);
+  text-decoration: none;
+}
+
+.site-nav a:hover {
+  color: var(--md-sys-color-primary);
+}
+
+/* Hero */
+.hero {
+  padding: 64px 0 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.hero-eyebrow {
+  color: var(--md-sys-color-primary);
+  background: var(--md-sys-color-primary-container);
+  padding: 6px 16px;
+  border-radius: var(--md-sys-shape-corner-full, 9999px);
+  color: var(--md-sys-color-on-primary-container);
+  margin: 0;
+}
+
+.hero-title {
+  margin: 0;
+  max-width: 16ch;
+  color: var(--md-sys-color-on-surface);
+}
+
+.hero-subtitle {
+  margin: 0;
+  max-width: 52ch;
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+/* Sections */
+.section {
+  padding: 48px 0 0;
+  position: relative;
+}
+
+.section-title {
+  margin: 0 0 4px;
+  color: var(--md-sys-color-on-surface);
+}
+
+.section-subtitle {
+  margin: 0 0 24px;
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+.subsection-title {
+  margin: 32px 0 12px;
+  color: var(--md-sys-color-on-surface);
+}
+
+/* Color grid */
+.color-grid {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.color-swatch {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 12px;
+  min-height: 88px;
+  border-radius: 12px;
+}
+
+.color-swatch code {
+  opacity: 0.8;
+}
+
+/* Type scale */
+.type-scale-card {
+  background: var(--md-sys-color-surface-container-low);
+  border-radius: 16px;
+  padding: 8px 20px;
+}
+
+.type-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--md-sys-color-outline-variant);
+  color: var(--md-sys-color-on-surface);
+}
+
+.type-row:last-child {
+  border-bottom: none;
+}
+
+.type-token {
+  color: var(--md-sys-color-on-surface-variant);
+  white-space: nowrap;
+}
+
+/* Component grid */
+.component-grid {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.component-card {
+  background: var(--md-sys-color-surface-container-low);
+  border: 1px solid var(--md-sys-color-outline-variant);
+  border-radius: 16px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.card-title {
+  margin: 0;
+  color: var(--md-sys-color-on-surface);
+}
+
+.button-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.form-demo {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.checkbox-label,
+.selection-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--md-sys-color-on-surface);
+}
+
+.selection-demo {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.slider-demo label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  color: var(--md-sys-color-on-surface);
+}
+
+.slider-demo md-slider {
+  width: 100%;
+}
+
+.tab-panel {
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+.tab-panel p {
+  margin: 8px 0 0;
+}
+
+.progress-demo {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+.progress-demo md-linear-progress {
+  width: 100%;
+}
+
+.fab {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 20;
+}
+
+/* Footer */
+.site-footer {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 24px 16px 32px;
+  color: var(--md-sys-color-on-surface-variant);
+  border-top: 1px solid var(--md-sys-color-outline-variant);
+}
+
+/* M3 window size class: medium (>= 600px) */
+@media (min-width: 600px) {
+  .wordmark-text {
+    display: inline;
+    color: var(--md-sys-color-on-surface-variant);
+    font-weight: 400;
+  }
+
+  .color-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .component-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* M3 window size class: expanded (>= 840px) */
+@media (min-width: 840px) {
+  .color-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .component-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .hero {
+    padding-top: 96px;
+  }
+}

@@ -1,0 +1,978 @@
+/*
+ * V-Zero Protocol — app layout. All color/shape/type come from M3 tokens.
+ * Breakpoints follow M3 window size classes (compact <600, medium 600-839,
+ * expanded >=840, large >=1200). Flexbox for rows, grid for card layouts.
+ */
+
+/* ----------------------------------------------------------------------- */
+/* App shell                                                               */
+/* ----------------------------------------------------------------------- */
+.app-shell {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr;
+  background: var(--md-sys-color-background);
+  color: var(--md-sys-color-on-background);
+}
+
+@media (min-width: 840px) {
+  .app-shell {
+    grid-template-columns: 264px 1fr;
+  }
+}
+
+/* Sidebar -------------------------------------------------------------- */
+.sidebar {
+  display: none;
+  flex-direction: column;
+  gap: 4px;
+  padding: 20px 16px;
+  background: var(--md-sys-color-surface-container-low);
+  border-right: 1px solid var(--md-sys-color-outline-variant);
+  position: sticky;
+  top: 0;
+  height: 100vh;
+}
+
+@media (min-width: 840px) {
+  .sidebar {
+    display: flex;
+  }
+}
+
+.sidebar-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 12px 20px;
+}
+
+.sidebar-glyph {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: var(--md-sys-color-primary);
+  color: var(--md-sys-color-on-primary);
+  flex-shrink: 0;
+}
+
+.sidebar-glyph md-icon {
+  font-size: 22px;
+  width: 22px;
+  height: 22px;
+}
+
+.sidebar-brand-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.sidebar-brand-text strong {
+  color: var(--md-sys-color-on-surface);
+  font-weight: 600;
+}
+
+.sidebar-brand-text span {
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+.sidebar-section-label {
+  padding: 8px 12px 4px;
+  color: var(--md-sys-color-on-surface-variant);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 11px 12px;
+  border-radius: 10px;
+  border: none;
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  color: var(--md-sys-color-on-surface-variant);
+  cursor: pointer;
+  font: inherit;
+  position: relative;
+  transition:
+    background-color 200ms ease,
+    color 200ms ease;
+}
+
+.nav-item md-icon {
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+}
+
+.nav-item:hover {
+  background: var(--md-sys-color-surface-container-high);
+  color: var(--md-sys-color-on-surface);
+}
+
+.nav-item[aria-current='true'] {
+  background: var(--md-sys-color-primary-container);
+  color: var(--md-sys-color-on-primary-container);
+  font-weight: 600;
+}
+
+.sidebar-footer {
+  margin-top: auto;
+  padding: 12px;
+  border-radius: 12px;
+  background: var(--md-sys-color-surface-container);
+  border: 1px solid var(--md-sys-color-outline-variant);
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+.sidebar-footer-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--md-sys-color-on-surface);
+}
+
+.sidebar-footer-row md-icon {
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+  color: var(--vz-positive);
+}
+
+/* ----------------------------------------------------------------------- */
+/* Main column                                                             */
+/* ----------------------------------------------------------------------- */
+.main-col {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+/* Top header ----------------------------------------------------------- */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 16px;
+  background: color-mix(in srgb, var(--md-sys-color-surface) 88%, transparent);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--md-sys-color-outline-variant);
+}
+
+@media (min-width: 840px) {
+  .topbar {
+    padding: 12px 28px;
+  }
+}
+
+.topbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--md-sys-color-on-surface);
+}
+
+.topbar-brand .sidebar-glyph {
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+}
+
+.topbar-brand .sidebar-glyph md-icon {
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+}
+
+@media (min-width: 840px) {
+  .topbar-brand {
+    display: none;
+  }
+}
+
+.topbar-title {
+  font-weight: 600;
+  color: var(--md-sys-color-on-surface);
+}
+
+.topbar-spacer {
+  margin-left: auto;
+}
+
+.topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Wallet badge --------------------------------------------------------- */
+.wallet-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  border-radius: 9999px;
+  background: var(--md-sys-color-surface-container-high);
+  border: 1px solid var(--md-sys-color-outline-variant);
+  color: var(--md-sys-color-on-surface);
+}
+
+.wallet-badge .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--vz-positive);
+  flex-shrink: 0;
+}
+
+.wallet-badge code {
+  font-family: ui-monospace, "SF Mono", "Roboto Mono", Menlo, monospace;
+  letter-spacing: 0.02em;
+}
+
+.wallet-badge-label {
+  display: none;
+}
+
+@media (min-width: 600px) {
+  .wallet-badge-label {
+    display: inline;
+    color: var(--md-sys-color-on-surface-variant);
+  }
+}
+
+/* Role switcher select sizing */
+.role-switcher {
+  min-width: 168px;
+  --md-outlined-text-field-container-shape: 10px;
+}
+
+/* ----------------------------------------------------------------------- */
+/* Content area                                                            */
+/* ----------------------------------------------------------------------- */
+.content {
+  flex: 1;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px 16px 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+@media (min-width: 840px) {
+  .content {
+    padding: 32px 28px 96px;
+    gap: 28px;
+  }
+}
+
+.page-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.page-head-text h1 {
+  margin: 0;
+  color: var(--md-sys-color-on-surface);
+}
+
+.page-head-text p {
+  margin: 6px 0 0;
+  color: var(--md-sys-color-on-surface-variant);
+  max-width: 64ch;
+}
+
+.head-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* Generic surface card ------------------------------------------------- */
+.surface-card {
+  background: var(--md-sys-color-surface);
+  border: 1px solid var(--md-sys-color-outline-variant);
+  border-radius: 16px;
+  --md-elevated-card-container-color: var(--md-sys-color-surface);
+  --md-outlined-card-container-color: var(--md-sys-color-surface);
+  --md-outlined-card-outline-color: var(--md-sys-color-outline-variant);
+}
+
+.card-pad {
+  padding: 24px;
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 18px 24px;
+  border-bottom: 1px solid var(--md-sys-color-outline-variant);
+}
+
+.card-header h2,
+.card-header h3 {
+  margin: 0;
+  color: var(--md-sys-color-on-surface);
+}
+
+.card-header-sub {
+  color: var(--md-sys-color-on-surface-variant);
+  margin: 2px 0 0;
+}
+
+/* ----------------------------------------------------------------------- */
+/* Stat / metric cards                                                     */
+/* ----------------------------------------------------------------------- */
+.metric-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+@media (min-width: 600px) {
+  .metric-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.metric-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px;
+}
+
+.metric-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+.metric-icon {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: var(--md-sys-color-surface-container-high);
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+.metric-icon md-icon {
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+}
+
+.metric-value {
+  color: var(--md-sys-color-on-surface);
+  font-weight: 600;
+}
+
+.metric-foot {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+.metric-foot.positive {
+  color: var(--vz-positive);
+}
+
+.metric-foot md-icon {
+  font-size: 16px;
+  width: 16px;
+  height: 16px;
+}
+
+/* Status pill ---------------------------------------------------------- */
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.status-pill md-icon {
+  font-size: 15px;
+  width: 15px;
+  height: 15px;
+}
+
+.status-pill.positive {
+  background: var(--vz-positive-container);
+  color: var(--vz-on-positive-container);
+}
+
+.status-pill.neutral {
+  background: var(--md-sys-color-surface-container-high);
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+.status-pill.warning {
+  background: var(--vz-warning-container);
+  color: var(--vz-on-warning-container);
+}
+
+.status-pill.info {
+  background: var(--md-sys-color-secondary-container);
+  color: var(--md-sys-color-on-secondary-container);
+}
+
+/* ----------------------------------------------------------------------- */
+/* Tables                                                                  */
+/* ----------------------------------------------------------------------- */
+.table-scroll {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 720px;
+}
+
+.data-table th {
+  text-align: left;
+  padding: 12px 20px;
+  color: var(--md-sys-color-on-surface-variant);
+  border-bottom: 1px solid var(--md-sys-color-outline-variant);
+  white-space: nowrap;
+  background: var(--md-sys-color-surface-container-low);
+}
+
+.data-table td {
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--md-sys-color-outline-variant);
+  color: var(--md-sys-color-on-surface);
+  vertical-align: middle;
+}
+
+.data-table tbody tr {
+  transition: background-color 200ms ease;
+}
+
+.data-table tbody tr:hover td {
+  background: var(--md-sys-color-surface-container-low);
+}
+
+.data-table tr:last-child td {
+  border-bottom: none;
+}
+
+.num {
+  font-variant-numeric: tabular-nums;
+  font-family: ui-monospace, "SF Mono", "Roboto Mono", Menlo, monospace;
+}
+
+.tx-hash {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: ui-monospace, "SF Mono", "Roboto Mono", Menlo, monospace;
+  color: var(--md-sys-color-primary);
+  text-decoration: none;
+}
+
+.tx-hash:hover {
+  text-decoration: underline;
+}
+
+.dark .tx-hash {
+  color: var(--md-sys-color-on-surface);
+}
+
+.asset-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 9px;
+  border-radius: 6px;
+  border: 1px solid var(--md-sys-color-outline-variant);
+  background: var(--md-sys-color-surface-container);
+  color: var(--md-sys-color-on-surface-variant);
+  font-weight: 500;
+}
+
+/* Masked value with fade transition */
+.masked-cell {
+  position: relative;
+}
+
+.masked-cell .reveal,
+.masked-cell .mask {
+  transition: opacity 200ms ease;
+}
+
+.mask-dots {
+  letter-spacing: 0.12em;
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+/* ----------------------------------------------------------------------- */
+/* Onboarding / centered card states                                       */
+/* ----------------------------------------------------------------------- */
+.center-stage {
+  display: flex;
+  justify-content: center;
+  padding: 32px 0;
+}
+
+.activate-card {
+  max-width: 520px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 18px;
+  padding: 40px 32px;
+}
+
+.activate-emblem {
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 18px;
+  background: var(--md-sys-color-primary-container);
+  color: var(--md-sys-color-on-primary-container);
+}
+
+.activate-emblem md-icon {
+  font-size: 32px;
+  width: 32px;
+  height: 32px;
+}
+
+.activate-card h1 {
+  margin: 0;
+  color: var(--md-sys-color-on-surface);
+}
+
+.activate-card p {
+  margin: 0;
+  color: var(--md-sys-color-on-surface-variant);
+  max-width: 46ch;
+}
+
+.activate-card code {
+  font-family: ui-monospace, "SF Mono", "Roboto Mono", Menlo, monospace;
+  background: var(--md-sys-color-surface-container-high);
+  padding: 1px 6px;
+  border-radius: 5px;
+}
+
+/* Animated press for primary CTA */
+.press-scale {
+  transition: transform 200ms ease;
+}
+
+.press-scale:active {
+  transform: scale(0.98);
+}
+
+/* ----------------------------------------------------------------------- */
+/* Toolbar above tables / sections                                         */
+/* ----------------------------------------------------------------------- */
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  justify-content: space-between;
+}
+
+.toolbar-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--md-sys-color-on-surface);
+}
+
+.decrypt-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--md-sys-color-on-surface);
+}
+
+.decrypt-toggle .label-stack {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.decrypt-toggle .label-stack small {
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+/* ----------------------------------------------------------------------- */
+/* Forms                                                                   */
+/* ----------------------------------------------------------------------- */
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+@media (min-width: 600px) {
+  .form-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.form-grid .span-2 {
+  grid-column: 1 / -1;
+}
+
+.field-label {
+  display: block;
+  margin: 0 0 6px;
+  color: var(--md-sys-color-on-surface);
+  font-weight: 500;
+}
+
+.md-field {
+  width: 100%;
+}
+
+.form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 4px;
+}
+
+/* Dropzone ------------------------------------------------------------- */
+.dropzone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 12px;
+  padding: 48px 24px;
+  border: 1.5px dashed var(--md-sys-color-outline);
+  border-radius: 14px;
+  background: var(--md-sys-color-surface-container-low);
+  color: var(--md-sys-color-on-surface-variant);
+  cursor: pointer;
+  transition:
+    background-color 200ms ease,
+    border-color 200ms ease;
+}
+
+.dropzone:hover,
+.dropzone.dragging {
+  border-color: var(--md-sys-color-primary);
+  background: var(--md-sys-color-primary-container);
+  color: var(--md-sys-color-on-primary-container);
+}
+
+.dropzone md-icon {
+  font-size: 40px;
+  width: 40px;
+  height: 40px;
+}
+
+.dropzone strong {
+  color: var(--md-sys-color-on-surface);
+}
+
+.dropzone.dragging strong {
+  color: var(--md-sys-color-on-primary-container);
+}
+
+.file-chip {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border-radius: 12px;
+  border: 1px solid var(--md-sys-color-outline-variant);
+  background: var(--md-sys-color-surface-container-low);
+  color: var(--md-sys-color-on-surface);
+  margin-top: 16px;
+}
+
+.file-chip md-icon {
+  color: var(--md-sys-color-primary);
+}
+
+.file-chip .file-meta {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.3;
+}
+
+.file-chip .file-meta small {
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+.file-chip .spacer {
+  margin-left: auto;
+}
+
+/* ----------------------------------------------------------------------- */
+/* Execution pipeline dialog                                               */
+/* ----------------------------------------------------------------------- */
+.pipeline {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: min(440px, 78vw);
+}
+
+.pipeline-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 14px 4px;
+}
+
+.pipeline-step + .pipeline-step {
+  border-top: 1px solid var(--md-sys-color-outline-variant);
+}
+
+.step-indicator {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.step-indicator.done {
+  background: var(--vz-positive-container);
+  color: var(--vz-on-positive-container);
+}
+
+.step-indicator.active {
+  background: var(--md-sys-color-primary-container);
+  color: var(--md-sys-color-on-primary-container);
+}
+
+.step-indicator.pending {
+  background: var(--md-sys-color-surface-container-high);
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+.step-indicator md-icon {
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+}
+
+.step-indicator md-circular-progress {
+  --md-circular-progress-size: 20px;
+  width: 20px;
+  height: 20px;
+}
+
+.step-body {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.step-body .title {
+  color: var(--md-sys-color-on-surface);
+  font-weight: 500;
+}
+
+.step-body.pending .title {
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+.step-body .meta {
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+.dialog-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 16px;
+  padding: 14px 16px;
+  border-radius: 12px;
+  background: var(--md-sys-color-surface-container-low);
+  border: 1px solid var(--md-sys-color-outline-variant);
+}
+
+.dialog-summary .row {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+.dialog-summary .row span:last-child {
+  color: var(--md-sys-color-on-surface);
+  font-family: ui-monospace, "SF Mono", "Roboto Mono", Menlo, monospace;
+}
+
+/* ----------------------------------------------------------------------- */
+/* Charts                                                                  */
+/* ----------------------------------------------------------------------- */
+.chart-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+@media (min-width: 840px) {
+  .chart-grid {
+    grid-template-columns: 3fr 2fr;
+  }
+}
+
+.chart-box {
+  padding: 20px 24px 24px;
+}
+
+.chart-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 14px;
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+.chart-legend .item {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.chart-legend .swatch {
+  width: 11px;
+  height: 11px;
+  border-radius: 3px;
+}
+
+.chart-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.range-tabs {
+  display: inline-flex;
+  gap: 4px;
+  padding: 3px;
+  border-radius: 9999px;
+  background: var(--md-sys-color-surface-container-high);
+}
+
+.range-tabs button {
+  border: none;
+  background: transparent;
+  padding: 5px 14px;
+  border-radius: 9999px;
+  cursor: pointer;
+  font: inherit;
+  color: var(--md-sys-color-on-surface-variant);
+  transition:
+    background-color 200ms ease,
+    color 200ms ease;
+}
+
+.range-tabs button[aria-pressed='true'] {
+  background: var(--md-sys-color-surface);
+  color: var(--md-sys-color-on-surface);
+  font-weight: 500;
+}
+
+/* Vault access --------------------------------------------------------- */
+.vault-card {
+  max-width: 560px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 36px 32px;
+}
+
+.vault-head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.vault-head .activate-emblem {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+}
+
+.vault-head .activate-emblem md-icon {
+  font-size: 24px;
+  width: 24px;
+  height: 24px;
+}
+
+.vault-head h1 {
+  margin: 0;
+  color: var(--md-sys-color-on-surface);
+}
+
+.vault-head p {
+  margin: 2px 0 0;
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+.vault-divider {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+.vault-divider::before,
+.vault-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--md-sys-color-outline-variant);
+}
+
+/* tabs panel spacing */
+.tab-content {
+  padding-top: 8px;
+}
+
+/* tabular helper for tiny captions */
+.muted {
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+.section-label {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--md-sys-color-on-surface-variant);
+}
