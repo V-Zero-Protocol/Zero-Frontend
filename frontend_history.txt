@@ -17,3 +17,4 @@ feat: configure client-side deterministic viewing key derivation
 math: implement local cryptographic parsing models for Ivsk keychains
 ui: inject smooth transition states for viewing key registration panel
 ui: implement glassmorphism card styling blocks for workspace elements
+fix: bypass powershell execution script permission blockages locally
