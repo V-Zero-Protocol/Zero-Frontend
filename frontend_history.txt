@@ -10,3 +10,4 @@ code: implement local active account balance tracking modules
 build: execute auto-generation of typesafe stellar contract bindings
 config: resolve client-side build folder location path variables
 chore: setup local configuration for vzero-client sub-package
+fix: resolve tsc compiler type validation bugs in generated models
