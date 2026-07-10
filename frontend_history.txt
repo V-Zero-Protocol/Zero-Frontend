@@ -15,3 +15,4 @@ build: execute internal npm run build inside vzero-client folder
 code: connect view layer event triggers to orchestrator bindings
 feat: configure client-side deterministic viewing key derivation
 math: implement local cryptographic parsing models for Ivsk keychains
+ui: inject smooth transition states for viewing key registration panel
