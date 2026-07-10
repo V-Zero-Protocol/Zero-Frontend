@@ -13,3 +13,4 @@ chore: setup local configuration for vzero-client sub-package
 fix: resolve tsc compiler type validation bugs in generated models
 build: execute internal npm run build inside vzero-client folder
 code: connect view layer event triggers to orchestrator bindings
+feat: configure client-side deterministic viewing key derivation
