@@ -5,3 +5,4 @@ feat: construct layout navigation sidebar components
 ui: center the dashboard onboarding components using flexbox
 ui: style contributor workspace action view models
 ui: craft compliance audit list data grid view panel
+feat: integrate stellar freighter wallet browser connection hooks
