@@ -11,3 +11,4 @@ build: execute auto-generation of typesafe stellar contract bindings
 config: resolve client-side build folder location path variables
 chore: setup local configuration for vzero-client sub-package
 fix: resolve tsc compiler type validation bugs in generated models
+build: execute internal npm run build inside vzero-client folder
