@@ -1,6 +1,77 @@
-V-Zero ProtocolA secure, enterprise-grade frontend client for managing shielded payroll execution, compliance auditing, and encrypted contributor workspaces.The V-Zero Protocol interface is designed with a strict focus on a mature, clean corporate aesthetic, drawing structural inspiration from industry-standard platforms like Gusto, Deel, and Stripe. It prioritizes crisp typography, precise layouts, explicit spacing, and premium component maturity over visual noise.Architecture & Global LayoutThe application utilizes a fixed structural shell to ensure seamless navigation across varying user roles and application states.Sidebar Navigation: A fixed left-hand sidebar containing clean text links and semantic leading icons for primary application modules: Contributor Dashboard, Payroll Workspace, and Compliance Audit.Global Header:Branding: Displays "V-Zero Protocol" in a bold, clean weight.Wallet Status: An indicator badge displaying the connected Stellar public key (e.g., GDU3...8ZK9).Role Switcher: A contextual dropdown select component (Contributor, Payroll Manager, Auditor) that dynamically updates the application state and layout views.Core Modules1. Contributor Dashboard (Employee View)A secure workspace for individual contributors to manage their identity and view encrypted financial logs.Uninitialized State (First-Time Onboarding):Requires the user to activate their compliance layer.Prompts the generation of a deterministic wallet signature to compute the private viewing key ($Ivsk$).Features a primary "Generate and Register Viewing Key" action with subtle hover scaling (active:scale-[0.98]).Active Dashboard & Decrypted Ledger:Metrics: Border-isolated cards tracking Total Shielded Earnings, Total Received Claims, and Identity Verification Status.Log Table: A dense data grid displaying Date, Transaction Hash, Plaintext Amount, Asset (USDC, XLM), Milestone Reference, and Corporate Memo.Local Decryption Mode: A functional toggle that instantly switches table data from masked indicators (••••••) to clear text using a smooth opacity transition.2. Payroll Manager Workspace (Employer View)The execution engine for processing single and batch payroll transactions.Execution Form: A tabbed interface supporting:Single Payouts: Grouped inputs for Recipient Stellar Address, Asset Type, Amount, Milestone ID, and Private Corporate Memo.Batch Uploads: A minimal, dashed-border dropzone for parsing corporate payroll CSV logs.Multi-Step Progress Pipeline: A structured dialog modal triggered during payment execution, featuring animated loaders for complex cryptographic states:Fetching Recipient Public Viewing Keys ($Ivpk$) from Registry.Encrypting business metadata via AES-256-GCM.Generating Nethermind SPP Zero-Knowledge proofs.Awaiting V-Zero Orchestrator ledger atomicity.3. Compliance Audit (Auditor View)An administrative portal for reconciling global obscured on-chain commitments with decrypted organizational parameters.Secure Vault Access: An entry screen requiring an organizational viewing key or an authorized cryptographic credential file.Reconstructed Master Log:Visualizations: Clean line or bar charts tracking total spend and audit compliance health over selected time boundaries (30 days, 90 days, 1 year).Data Grid: A robust table exposing clear-text corporate parameters against on-chain transaction hashes.Export Actions: Header buttons to "Export Audit Package (CSV)" and "Download Signed Report (PDF)".Design System & UI GuidelinesThe application strictly adheres to the following visual and functional rules to maintain an ultra-professional tone.ElementGuidelineColor PaletteSophisticated monochrome and neutral scale. Utilizes slate/zinc grays, clean borders, bright white surfaces, and deep dark slate text for maximum contrast.TypographyClean, highly legible sans-serif system font stack. Focuses on hierarchy and readability.Component LibraryBased on functional primitives simulating shadcn/ui and Radix UI. Components must remain balanced, accessible, and production-ready.IconographySharp, professional vector icons via lucide-react. Restricted to semantic anchors only (e.g., Eye, Shield, FileText). Custom illustrations are strictly prohibited.AnimationsLimited to subtle, professional micro-interactions. Primary buttons, row expansions, and state toggles use smooth CSS transitions (e.g., transition-all duration-200 ease-in-out).Development SetupNote: Ensure you have Node.js (v18+) and your preferred package manager installed before proceeding.Clone the repository:Bashgit clone `https://github.com/your-org/v-zero-frontend.git`  
- cd v-zero-frontend  
- Install dependencies:Bashnpm install  
- Configure environment variables:  
- Copy the .env.example file and populate the required cryptographic and network parameters.Bashcp .env.example .env.local  
- Initialize the development server:Bashnpm run dev
+# V-Zero Protocol: Smart Contracts
+
+Core WebAssembly smart contracts for the **V-Zero Protocol**, a confidential on-chain payroll and compliance infrastructure built on the Stellar network using Soroban.
+
+---
+
+## 🏗️ Architecture Overview
+
+The protocol splits responsibility across two major smart contracts to maintain validation state and manage transactional logic cleanly:
+
+                  +-----------------------------+
+                  |     Client / Frontend       |
+                  +--------------+--------------+
+                                 |
+                                 | Invokes methods
+                                 v
+                  +--------------+--------------+
+                  |    Orchestrator Contract    |
+                  |    (Primary Engine)         |
+                  +--------------+--------------+
+                                 |
+                                 | Internal Cross-Call
+                                 v
+                  +--------------+--------------+
+                  |   Audit Registry Contract   |
+                  |    (Immutable State Log)    |
+                  +-----------------------------+
+
+* **Audit Registry (`audit_registry.wasm`):** Acts as the immutable data log. It stores, tracks, and archives verified historical compliance records and validator state hashes.
+* **Orchestrator (`orchestrator.wasm`):** The primary execution engine. It interfaces between user actions, handles cryptographic state configurations, balances conditional execution flows, and communicates directly with the Audit Registry via cross-contract calls.
+
+---
+
+## 🛠️ Prerequisites & Environment Setup
+
+Ensure you have the native global Rust toolchain and Stellar CLI installed locally:
+
+* **Rust:** Stable channel (`wasm32-unknown-unknown` target added)
+* **Stellar CLI:** Global binary workspace toolchain installed via Cargo
+
+---
+
+## 📦 Compilation & Build Pipeline
+
+Standard compiler outputs can occasionally embed modern WebAssembly feature proposals (like `reference-types`) that certain CLI runtimes strictly check. To generate perfectly optimized, minimized, and clean binaries ready for Soroban transaction simulation, compile using the following custom configuration:
+
+```cmd
+cargo build --target wasm32-unknown-unknown --release --target-dir C:\Users\USER\Desktop\vzero_temp_build --config "target.wasm32-unknown-unknown.rustflags=['-C', 'target-feature=-reference-types']"
+🧹 Optimization Flag Bypass
+If the compiler links cached modules containing unneeded headers, clear the cargo build directory cache entirely and force a fresh optimization cycle using the built-in CLI module optimizer:
+
+DOS
+# 1. Clean build directory cache
+cargo clean --target-dir C:\Users\USER\Desktop\vzero_temp_build
+
+# 2. Build via the feature exclusion configuration flag above
+# 3. Strip legacy headers using the Stellar compiler engine
+stellar contract optimize --wasm C:\Users\USER\Desktop\vzero_temp_build\wasm32-unknown-unknown\release\orchestrator.wasm
+This outputs a clean, minimized production file named orchestrator.optimized.wasm under the release folder.
+
+🚀 Network Deployment (Stellar Testnet)
+1. Initialize Network Identity Configuration
+Generate or register your developer deployment private secret key using an interactive hidden prompt session:
+
+DOS
+stellar keys add deployer
+When prompted, paste your Testnet-funded secret key starting with S securely.
+
+2. Deploy Smart Contracts to Ledger
+Execute the network payload submissions sequentially to upload your optimized bytecode modules:
+
+DOS
+# Deploy the Audit Registry Contract Module
+stellar contract deploy --network testnet --source deployer --wasm C:\Users\USER\Desktop\vzero_temp_build\wasm32-unknown-unknown\release\audit_registry.wasm
+
+# Deploy the Main Orchestrator Contract Module
+stellar contract deploy --network testne
