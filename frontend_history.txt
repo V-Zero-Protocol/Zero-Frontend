@@ -2,3 +2,4 @@ chore: bootstrap next.js boilerplate framework template
 config: apply tailwind css layouts and typography standards
 feat: design layout layout core scaffolding layout wireframes
 feat: construct layout navigation sidebar components
+ui: center the dashboard onboarding components using flexbox
