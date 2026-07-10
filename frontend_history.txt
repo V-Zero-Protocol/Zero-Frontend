@@ -1,0 +1,1 @@
+chore: bootstrap next.js boilerplate framework template
