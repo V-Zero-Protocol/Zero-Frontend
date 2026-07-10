@@ -19,3 +19,4 @@ ui: inject smooth transition states for viewing key registration panel
 ui: implement glassmorphism card styling blocks for workspace elements
 fix: bypass powershell execution script permission blockages locally
 fix: fix missing module import references on component load events
+perf: optimize server-side page bundle hydration overhead splits
