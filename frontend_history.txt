@@ -21,3 +21,4 @@ fix: bypass powershell execution script permission blockages locally
 fix: fix missing module import references on component load events
 perf: optimize server-side page bundle hydration overhead splits
 ui: configure fluid light and dark mode application theme toggles
+docs: write deep setup usage guidelines within root documentation file
