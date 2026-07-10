@@ -8,3 +8,4 @@ ui: craft compliance audit list data grid view panel
 feat: integrate stellar freighter wallet browser connection hooks
 code: implement local active account balance tracking modules
 build: execute auto-generation of typesafe stellar contract bindings
+config: resolve client-side build folder location path variables
