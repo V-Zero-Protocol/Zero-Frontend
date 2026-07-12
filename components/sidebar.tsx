@@ -1,6 +1,7 @@
 'use client'
 
-import { Shield, Wallet, CreditCard, ShieldCheck } from 'lucide-react'
+import { Wallet, CreditCard, ShieldCheck } from 'lucide-react'
+import { VZeroShield } from './vzero-shield'
 import type { ViewKey } from '@/lib/data'
 
 const NAV: { key: ViewKey; label: string; icon: React.ReactNode }[] = [
@@ -24,7 +25,7 @@ export function Sidebar({
           aria-hidden="true"
           style={{ display: 'grid', placeItems: 'center' }}
         >
-          <Shield size={22} />
+          <VZeroShield size={22} />
         </span>
         <span className="sidebar-brand-text">
           <strong>V-Zero Protocol</strong>
